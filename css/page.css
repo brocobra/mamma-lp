@@ -1,0 +1,287 @@
+@charset "UTF-8";
+/* mammaの店 — ページ固有のスタイル。stage-layout.css は触らない */
+
+:root {
+  --stage-w:       430px;
+  --pc-stage-half: 215px;
+  --stage-bg:      #1f2a3a;   /* 深い藍。PCの両脇 */
+  --kinari:        #f4efe4;   /* 生成り。ステージ本体 */
+  --kinari-2:      #ebe4d5;
+  --sumi:          #2b2722;   /* 墨 */
+  --sumi-soft:     #5a534a;
+  --ai:            #2f4a6b;   /* 藍 */
+  --line:          #d6ccb8;
+  --ph:            #9a4a2a;   /* プレースホルダー注記の色 */
+  --mincho: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --gothic: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+
+body {
+  background: var(--stage-bg);
+  color: var(--sumi);
+  font-family: var(--gothic);
+  font-size: 15px;
+  line-height: 1.95;
+  letter-spacing: .04em;
+}
+a { color: var(--ai); text-underline-offset: 3px; }
+
+.block-stage { background: var(--kinari); }
+@media screen and (max-width: 1023px) {
+  .block-stage { background: var(--kinari); }
+}
+
+/* ---------- ガター（PC） ---------- */
+.block-stage-pc ._logo-pc {
+  writing-mode: vertical-rl;
+  color: var(--kinari);
+  font-family: var(--mincho);
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+.block-stage-pc ._logo-pc ._name  { font-size: 40px; letter-spacing: .2em; font-weight: 700; }
+.block-stage-pc ._logo-pc ._genre,
+.block-stage-pc ._logo-pc ._place { font-size: 14px; letter-spacing: .4em; opacity: .7; }
+
+.block-stage-pc ._nav-pc {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-family: var(--mincho);
+}
+.block-stage-pc ._nav-pc a {
+  color: var(--kinari);
+  text-decoration: none;
+  font-size: 15px;
+  letter-spacing: .2em;
+  opacity: .75;
+  transition: opacity .3s;
+}
+.block-stage-pc ._nav-pc a:hover { opacity: 1; }
+
+/* ---------- 写真プレースホルダー ---------- */
+.ph-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 10px, rgba(43,39,34,.04) 10px 11px),
+    var(--kinari-2);
+  border: 1px dashed var(--line);
+  color: var(--sumi-soft);
+  font-size: 13px;
+  text-align: center;
+  line-height: 1.6;
+  padding: 12px;
+}
+.ph-photo small { font-size: 11px; }
+
+/* 未確定情報の注記 */
+.ph {
+  display: inline-block;
+  color: var(--ph);
+  font-size: 12px;
+  line-height: 1.6;
+  border-bottom: 1px dashed currentColor;
+}
+.ph::before { content: "【"; }
+.ph::after  { content: "】"; }
+.ph-block {
+  border: 1px dashed var(--ph);
+  color: var(--ph);
+  background: rgba(154,74,42,.04);
+}
+
+/* ---------- ヒーロー ---------- */
+.block-mv { background: var(--kinari); }
+@media print, screen and (min-width: 1024px) {
+  .block-mv { height: 760px; }
+}
+.block-mv ._main { height: 100%; display: flex; flex-direction: column; }
+.block-mv ._photo { aspect-ratio: auto; flex: 1 1 auto; border: 0; border-bottom: 1px solid var(--line); }
+.block-mv ._main-logo {
+  position: static;
+  padding: 32px 28px 40px;
+}
+.block-mv ._genre {
+  font-family: var(--mincho);
+  font-size: 13px;
+  letter-spacing: .4em;
+  color: var(--sumi-soft);
+}
+.block-mv ._name {
+  margin: 4px 0 18px;
+  font-family: var(--mincho);
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  line-height: 1.3;
+}
+.block-mv ._catch {
+  font-family: var(--mincho);
+  font-size: 16px;
+  line-height: 2;
+}
+.block-mv ._notice {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--sumi-soft);
+}
+.block-mv ._intro-logo {
+  font-family: var(--mincho);
+  font-size: 32px;
+  letter-spacing: .2em;
+  white-space: nowrap;
+}
+
+/* ---------- セクション共通 ---------- */
+.block-sec { padding: 72px 28px; border-top: 1px solid var(--line); }
+.block-sec p + p { margin-top: 1em; }
+.block-sec ._head { margin-bottom: 28px; }
+.block-sec ._en {
+  font-family: var(--mincho);
+  font-size: 12px;
+  letter-spacing: .3em;
+  color: var(--ai);
+  text-transform: uppercase;
+}
+.block-sec h2 {
+  font-family: var(--mincho);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: .08em;
+}
+.block-sec ._sub {
+  margin: 56px 0 20px;
+  font-family: var(--mincho);
+  font-size: 19px;
+  letter-spacing: .08em;
+  padding-left: 14px;
+  border-left: 3px solid var(--ai);
+  line-height: 1.5;
+}
+.block-sec ._small { font-size: 13px; color: var(--sumi-soft); }
+.block-sec ._note  { margin-top: 16px; }
+
+/* 看板の4品 */
+.list-signature { list-style: none; margin: 0; padding: 0; display: grid; gap: 36px; }
+.list-signature h4 {
+  margin: 14px 0 6px;
+  font-family: var(--mincho);
+  font-size: 18px;
+  letter-spacing: .06em;
+}
+.list-signature p { font-size: 14px; }
+
+/* メイン実績 */
+.grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 14px; }
+.grid-main figure { margin: 0; }
+.grid-main .ph-photo { aspect-ratio: 1; }
+.grid-main figcaption {
+  margin-top: 8px;
+  font-family: var(--mincho);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.grid-main figcaption small {
+  display: block;
+  font-family: var(--gothic);
+  font-size: 11px;
+  color: var(--sumi-soft);
+  margin-top: 2px;
+}
+.block-sec ._more {
+  margin-top: 28px;
+  font-size: 13px;
+  line-height: 2;
+  color: var(--sumi-soft);
+}
+.block-sec ._more span {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 0 6px;
+  font-size: 11px;
+  color: var(--kinari);
+  background: var(--sumi);
+  line-height: 1.7;
+}
+
+/* 小鉢 */
+.list-kobachi dl {
+  display: grid;
+  grid-template-columns: 4.5em 1fr;
+  gap: 12px;
+  margin: 0;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.list-kobachi dl:first-child { border-top: 1px solid var(--line); }
+.list-kobachi dt { font-family: var(--mincho); font-weight: 700; color: var(--ai); }
+.list-kobachi dd { margin: 0; font-size: 14px; line-height: 1.85; }
+
+/* 蓮田の野菜 */
+.sec-yasai { background: var(--kinari-2); }
+
+/* 女将 */
+.sec-okami ._portrait { margin-bottom: 24px; aspect-ratio: 3 / 4; }
+
+/* ご利用案内 */
+.list-rules { margin: 0 0 28px; padding: 0; list-style: none; }
+.list-rules li {
+  padding: 12px 0 12px 1.4em;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mincho);
+  font-size: 16px;
+  position: relative;
+}
+.list-rules li::before { content: "一"; position: absolute; left: 0; color: var(--ai); }
+
+.table-info { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table-info th, .table-info td {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.8;
+}
+.table-info th {
+  width: 6.5em;
+  font-family: var(--mincho);
+  font-weight: 500;
+  color: var(--sumi-soft);
+}
+
+.box-cta { margin-top: 32px; padding: 20px 22px; font-size: 13px; line-height: 1.85; }
+.box-cta ._label { font-weight: 500; font-size: 14px; }
+.box-cta ol { margin: 8px 0; padding-left: 1.4em; }
+
+/* 店舗情報 */
+.sec-tenpo { padding-bottom: 0; }
+.sec-tenpo ._map { margin: 28px -28px 0; }
+.sec-tenpo ._map iframe { display: block; width: 100%; height: 300px; border: 0; filter: grayscale(.6); }
+
+.block-footer {
+  margin: 0 -28px;
+  padding: 40px 28px 32px;
+  background: var(--sumi);
+  color: var(--kinari);
+  font-size: 13px;
+  text-align: center;
+}
+.block-footer a { color: var(--kinari); }
+.block-footer ._name { font-family: var(--mincho); font-size: 22px; letter-spacing: .15em; margin-bottom: 8px; }
+.block-footer ._copy { margin-top: 20px; font-size: 11px; opacity: .6; }
+
+/* SP：カンプ未確定なので vw 換算はせず、余白だけ広さに合わせる */
+@media screen and (max-width: 1023px) {
+  .block-sec { padding: 64px 22px; }
+  .sec-tenpo { padding-bottom: 0; }
+  .sec-tenpo ._map, .block-footer { margin-left: -22px; margin-right: -22px; }
+  .block-mv ._name { font-size: 36px; }
+}
+
+/* ?noAnim のときはスクロールインも止めて最初から表示 */
+body.is-no-anim .mod-inview { opacity: 1; transform: none; }
